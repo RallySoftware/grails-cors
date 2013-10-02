@@ -1,12 +1,10 @@
 package com.brandseye.cors
 
-import grails.test.mixin.TestFor
-
-import org.junit.Test
 import org.springframework.mock.web.MockFilterChain
 import org.springframework.mock.web.MockFilterConfig
 import org.springframework.mock.web.MockHttpServletRequest
-import grails.util.MockHttpServletResponse
+import org.springframework.mock.web.MockHttpServletResponse
+import spock.lang.Specification
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
 /**
  * @author Peter Schneider-Manzell
  */
-class CorsFilterTest {
+class CorsFilterSpec extends Specification {
 
     CorsFilter underTest;
     def minimalHeadersForAllAllowedRequests = ["Access-Control-Allow-Origin","Access-Control-Allow-Credentials"]

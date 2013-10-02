@@ -1,7 +1,7 @@
 import com.brandseye.cors.CorsFilter
 
 class CorsGrailsPlugin {
-    def version = "1.1.0"
+    def version = "1.1.1"
     def grailsVersion = "2.0 > *"
     def title = "CORS Plugin"
     def author = "David Tinker"
@@ -42,6 +42,12 @@ class CorsGrailsPlugin {
                     'init-param' {
                         'param-name'('expose.headers')
                         'param-value'(cfg.expose.headers.toString())
+                    }
+                }
+                if (cfg.append.custom.allow.headers) {
+                    'init-param' {
+                        'param-name'('append.custom.allow.headers')
+                        'param-value'(cfg.append.custom.allow.headers.toString())
                     }
                 }
             }

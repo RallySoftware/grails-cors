@@ -19,6 +19,7 @@ public class CorsFilter implements Filter {
     private Pattern allowOriginRegex;
     private String allowOrigin;
     private String exposeHeaders;
+    private static final String  defaultHeaders = "origin, authorization, accept, content-type, x-requested-with";
 
     public void init(FilterConfig cfg) throws ServletException {
         String regex = cfg.getInitParameter("allow.origin.regex");
@@ -28,7 +29,13 @@ public class CorsFilter implements Filter {
             optionsHeaders.put("Access-Control-Allow-Origin", "*");
         }
 
-        optionsHeaders.put("Access-Control-Allow-Headers", "origin, authorization, accept, content-type, x-requested-with");
+        String customAllowHeaders = cfg.getInitParameter("append.custom.allow.headers");
+        if(customAllowHeaders != null) {
+            optionsHeaders.put("Access-Control-Allow-Headers", defaultHeaders + ',' + customAllowHeaders);
+        } else {
+            optionsHeaders.put("Access-Control-Allow-Headers", defaultHeaders);
+        }
+
         optionsHeaders.put("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS");
         optionsHeaders.put("Access-Control-Max-Age", "3600");
         for (Enumeration<String> i = cfg.getInitParameterNames(); i.hasMoreElements(); ) {
