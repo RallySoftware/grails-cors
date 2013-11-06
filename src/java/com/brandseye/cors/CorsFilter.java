@@ -67,12 +67,15 @@ public class CorsFilter implements Filter {
                         resp.addHeader(e.getKey(), e.getValue());
                     }
                 }
+                ((HttpServletResponse) response).setStatus(204);
+                return;
             } else if (checkOrigin(req, resp)) {
                 if (exposeHeaders != null) {
                     resp.addHeader("Access-Control-Expose-Headers", exposeHeaders);
                 }
             }
         }
+
         filterChain.doFilter(request, response);
     }
 
