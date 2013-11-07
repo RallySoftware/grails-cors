@@ -19,7 +19,7 @@ public class CorsFilter implements Filter {
     private Pattern allowOriginRegex;
     private String allowOrigin;
     private String exposeHeaders;
-    private static final String  defaultHeaders = "origin, authorization, accept, content-type, x-requested-with";
+    private static final String  defaultHeaders = "origin, authorization, accept, content-type, x-requested-with, x-parent-id, x-trace-id";
 
     public void init(FilterConfig cfg) throws ServletException {
         String regex = cfg.getInitParameter("allow.origin.regex");
